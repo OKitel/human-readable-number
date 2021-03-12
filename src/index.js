@@ -35,6 +35,8 @@ module.exports = function toReadable (number) {
     function findDozen (num) {      
     
         switch (num) {
+            case 10:
+                return 'ten';
             case 20:
                 return 'twenty';
             case 30:
@@ -98,7 +100,7 @@ module.exports = function toReadable (number) {
         }
 
                
-    } else if ( number > 100) {
+    } else if ( number >= 100) {
         telpuch = number % 10;
         dozen = (number - telpuch) % 100;
         hundreds = (number - dozen - telpuch) / 100;
@@ -113,6 +115,9 @@ module.exports = function toReadable (number) {
             return hundredsResult;
         } else if ((dozen+telpuch) >= 1 && (dozen+telpuch) <= 9) {
             hundredsResult = findUnits (hundreds)+ ' ' +'hundred'+ ' ' + findUnits (telpuch);
+            return hundredsResult;
+        } if (dozen == 10) {
+            hundredsResult = findUnits (hundreds)+ ' ' +'hundred'+ ' ' + findDozen (dozen);
             return hundredsResult;
         } else if (telpuch == 0) {
             hundredsResult = findUnits (hundreds)+ ' ' +'hundred'+ ' ' + findDozen (dozen);
