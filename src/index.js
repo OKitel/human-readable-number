@@ -105,16 +105,21 @@ module.exports = function toReadable (number) {
         if ( dozen > 19 && telpuch > 0) {
             let hundredsResult = findUnits (hundreds)+ ' ' +'hundred'+ ' ' + findDozen (dozen) + ' ' + findUnits (telpuch);
             return hundredsResult;
-        } else if (telpuch == 0) {
-            hundredsResult = findUnits (hundreds)+ ' ' +'hundred'+ ' ' + findDozen (dozen);
-            return hundredsResult;
-        } else if (dozen >= 11 && dozen < 20) {
-            hundredsResult = findUnits (hundreds)+ ' ' +'hundred'+ ' ' + findTeens(dozen)
-            return hundredsResult;
         } else if (hundreds * 100 == number)  {
             hundredsResult = findUnits (hundreds)+ ' ' +'hundred';
             return hundredsResult;
-        }      
+        } else if ((dozen+telpuch) >= 11 && (dozen+telpuch) < 20) {
+            hundredsResult = findUnits (hundreds)+ ' ' +'hundred'+ ' ' + findTeens(dozen+telpuch);
+            return hundredsResult;
+        } else if ((dozen+telpuch) >= 1 && (dozen+telpuch) <= 9) {
+            hundredsResult = findUnits (hundreds)+ ' ' +'hundred'+ ' ' + findUnits (telpuch);
+            return hundredsResult;
+        } else if (telpuch == 0) {
+            hundredsResult = findUnits (hundreds)+ ' ' +'hundred'+ ' ' + findDozen (dozen);
+            return hundredsResult;
+        }
+      
+            
     }
      
 }
